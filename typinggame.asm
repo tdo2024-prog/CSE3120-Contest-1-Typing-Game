@@ -15,12 +15,23 @@ INCLUDE Irvine32.inc
 .data
 msgTitle BYTE "ASSEMBLY TYPING GAME", 0
 
+
+; Timer menu (Irvine, Chapter 3.4)
+msgMenu BYTE "Select timer:",0Dh,0Ah
+        BYTE "[1] 30 seconds",0Dh,0Ah
+        BYTE "[2] 60 seconds",0Dh,0Ah,0
+
 .code
 main PROC
    
    mov edx, OFFSET msgTitle
    call WriteString
    call Crlf
+
+   ; Display menu, using Irvine32 (Chapter 5.4)
+    mov edx, OFFSET msgMenu
+    call WriteString
+
    INVOKE ExitProcess, 0
 
 main ENDP
