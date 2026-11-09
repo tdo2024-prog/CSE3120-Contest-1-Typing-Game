@@ -25,7 +25,7 @@ timerSeconds DWORD 0
 msgSelected BYTE "Selected duration (seconds): ",0
 
 msgReady BYTE "Press SPACEBAR to start...",0Dh,0Ah,0
-msgStarted BYTE "Let's begin'!",0Dh,0Ah,0
+msgStarted BYTE "Let's begin!",0Dh,0Ah,0
 
 .code
 main PROC
