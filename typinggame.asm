@@ -24,6 +24,9 @@ msgMenu BYTE "Select timer:",0Dh,0Ah
 timerSeconds DWORD 0
 msgSelected BYTE "Selected duration (seconds): ",0
 
+msgReady BYTE "Press SPACE to begin...",0Dh,0Ah,0
+msgStarted BYTE "Game started!",0Dh,0Ah,0
+
 .code
 main PROC
   
@@ -36,7 +39,7 @@ main PROC
    call WriteString
 
    
-   ; Select game duration, Irvine, Chapter 5.4 (ReadChar, WriteDec)
+   ; Select game duration. Irvine, Chapter 5.4 (ReadChar, WriteDec)
     SelectTime:
        call ReadChar
        cmp al, '1'
@@ -58,6 +61,17 @@ main PROC
        call WriteDec
        call Crlf
 
+   ; Wait for the user to hit the spacebar to continue. Irvine, Ch. 5 and 6 (ReadChar, CMP, conditional jmp)
+    mov edx, OFFSET msgReady
+    call WriteString
+
+    WaitForSpace:
+    call ReadChar
+    cmp al, ' '
+    jne WaitForSpace
+
+    mov edx, OFFSET msgStarted
+    call WriteString
 
    INVOKE ExitProcess, 0
 
