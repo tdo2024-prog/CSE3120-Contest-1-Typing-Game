@@ -27,13 +27,37 @@ msgSelected BYTE "Selected duration (seconds): ",0
 .code
 main PROC
   
-    mov edx, OFFSET msgTitle
+   mov edx, OFFSET msgTitle
    call WriteString
    call Crlf
 
    ; Display menu using Irvine32 (Chapter 5.4)
    mov edx, OFFSET msgMenu
    call WriteString
+
+   
+   ; Select game duration, Irvine, Chapter 5.4 (ReadChar, WriteDec)
+    SelectTime:
+       call ReadChar
+       cmp al, '1'
+       je Set30
+
+       cmp al, '2'
+       jne SelectTime
+       mov timerSeconds, 60
+
+       jmp ShowTime
+
+    Set30:
+       mov timerSeconds, 30
+
+    ShowTime:
+       mov edx, OFFSET msgSelected
+       call WriteString
+       mov eax, timerSeconds
+       call WriteDec
+       call Crlf
+
 
    INVOKE ExitProcess, 0
 
