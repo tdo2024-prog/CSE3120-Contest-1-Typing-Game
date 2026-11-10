@@ -35,6 +35,8 @@ durationMs DWORD 0
 userBuffer BYTE 64 DUP(0)  ; 64-byte buffer initialized to zero
 inputIndex DWORD 0         ; tracks number of characters tyoed
 targetPtr DWORD 0          ; stores address of chosen phrase
+correctCount DWORD 0       ; # of correctly typed phrases
+
 
 .code
 main PROC
@@ -123,7 +125,7 @@ main PROC
        cmp al, 0
        je NoKeyPressed     ; ignore special keys
        cmp al, 13
-       je NoKeyPressed
+       je SubmitPhrase     ; hitting enter submits the phrase 
        cmp al, 8
        je NoKeyPressed
        mov esi, inputIndex
@@ -131,16 +133,30 @@ main PROC
        jae NoKeyPressed
 
        mov userBuffer[esi], al  ; each char is put into userBuffer and displayed
+       mov BYTE PTR userBuffer[esi+1], 0 ; end input
        mov ebx, targetPtr
        mov dl, [ebx+esi]        ; expected character
        call ColorTypedChar      ; show character in green or red
        inc inputIndex
-       call WriteChar
     NoKeyPressed:
        
        mov eax, 10
        call Delay          ; pause for 10ms before checking again
        jmp GameTimerLoop   
+
+    SubmitPhrase:
+        mov esi, OFFSET userBuffer
+        mov edi, targetPtr
+        call Str_compare   ; compare entered text with the target (Chapter 9)
+        jne NextPhrase     ; skips correctCount when they are different
+        inc correctCount   ; add to correct phrases when they match
+
+    NextPhrase:
+        call Crlf
+        mov inputIndex, 0
+        mov BYTE PTR userBuffer, 0
+        jmp PickPhrase     ; choose another, unused, phrase
+
 
     GameTimeUp:
        call Crlf
