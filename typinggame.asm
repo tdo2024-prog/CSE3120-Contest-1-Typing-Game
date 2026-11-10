@@ -28,7 +28,6 @@ msgSelected BYTE "Selected duration (seconds): ",0
 msgReady BYTE "Press SPACEBAR to start...",0Dh,0Ah,0
 msgStarted BYTE "Let's begin!",0Dh,0Ah,0
 
-
 ; Timer values (Irvine, Ch. 5, Sec. 5.4.3)
 startTime DWORD 0
 durationMs DWORD 0
@@ -182,7 +181,7 @@ main PROC
        mov edx, OFFSET msgTimeUp
        call WriteString
        call ShowScore      ; display correct phrase count
-
+       call ShowWPM        ; display words per minute
    INVOKE ExitProcess, 0
 
 main ENDP
@@ -191,5 +190,6 @@ INCLUDE phrase_logic.inc    ; phrase reset
 INCLUDE typing_feedback.inc ; text color feedback
 INCLUDE backspace.inc       ; backspace handling
 INCLUDE stats.inc           ; stats for end of game
+INCLUDE wpm.inc             ; wpm calculation
 
 END main
