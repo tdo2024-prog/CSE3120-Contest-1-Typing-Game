@@ -27,6 +27,8 @@ msgSelected BYTE "Selected duration (seconds): ",0
 
 msgReady BYTE "Press SPACEBAR to start...",0Dh,0Ah,0
 msgStarted BYTE "Let's begin!",0Dh,0Ah,0
+msgReplay BYTE "Press R to replay, press any other key to exit.",0Dh,0Ah,0
+
 
 ; Timer values (Irvine, Ch. 5, Sec. 5.4.3)
 startTime DWORD 0
@@ -182,7 +184,27 @@ main PROC
        call WriteString
        call ShowScore      ; display correct phrase count
        call ShowWPM        ; display words per minute
-   INVOKE ExitProcess, 0
+       
+       mov edx, OFFSET msgReplay
+       call WriteString
+       call ReadChar
+       cmp al, 'r'
+       je ReplayGame
+       cmp al, 'R'
+       jne ExitGame
+
+    ReplayGame:
+       call ResetPhrases    ; clears all the used flags
+       mov correctCount, 0  ; resets stats and input
+       mov correctChars, 0
+       mov elapsedMs, 0
+       mov inputIndex, 0
+       mov BYTE PTR userBuffer, 0
+       call Crlf
+       jmp SelectTime       ; jump back to start menu
+
+    ExitGame:
+       INVOKE ExitProcess, 0
 
 main ENDP
 
