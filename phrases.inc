@@ -31,6 +31,14 @@ phrase25 BYTE "Would you like the honest error report",0
 phrase26 BYTE "The machine is judging your timing",0
 phrase27 BYTE "I have several concerns sir",0
 phrase28 BYTE "That outcome was statistically unwise",0
+phrase29 BYTE "The arc reactor is emotionally unavailable",0
+phrase30 BYTE "The lab lights are acting suspicious",0
+phrase31 BYTE "Please remain calm while I improvise",0
+phrase32 BYTE "This feels expensive already",0
+phrase33 BYTE "I have isolated the dramatic variables",0
+phrase34 BYTE "The armor has trust issues again",0
+phrase35 BYTE "The diagnostics have entered their flop era",0
+phrase36 BYTE "The protocol was more of a suggestion",0
 
 ; storing phrases in a table (Irvine chapter 4.4)
 
@@ -39,7 +47,9 @@ phraseTable DWORD OFFSET phrase1, OFFSET phrase2, OFFSET phrase3, OFFSET phrase4
    OFFSET phrase11, OFFSET phrase12, OFFSET phrase13, OFFSET phrase14, OFFSET phrase15,
    OFFSET phrase16, OFFSET phrase17, OFFSET phrase18, OFFSET phrase19, OFFSET phrase20,
    OFFSET phrase21, OFFSET phrase22, OFFSET phrase23, OFFSET phrase24,
-   OFFSET phrase25, OFFSET phrase26, OFFSET phrase27, OFFSET phrase28
+   OFFSET phrase25, OFFSET phrase26, OFFSET phrase27, OFFSET phrase28,
+   OFFSET phrase29, OFFSET phrase30, OFFSET phrase31, OFFSET phrase32,
+   OFFSET phrase33, OFFSET phrase34, OFFSET phrase35, OFFSET phrase36
    ; LENGTHOF tracks the number of phrases
 
 phraseCount DWORD LENGTHOF phraseTable
