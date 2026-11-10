@@ -105,8 +105,10 @@ main PROC
 
         mov eax, usedCount
         cmp eax, phraseCount  ; stop selecting when every phrase has been used
-        jae GameTimeUp        ; (Chapter 6 cmp and jumps)
-        
+        jb PhrasesAvailable       ; (Chapter 6 cmp and jumps)
+        call ResetPhrases
+    PhrasesAvailable:
+
         mov eax, phraseCount  ; RandomRange selects a number from 0 to phraseCount - 1 (Chapter 5.4)
         call RandomRange
         
