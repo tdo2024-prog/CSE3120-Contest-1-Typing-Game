@@ -8,15 +8,15 @@ This assembly game lets players show off their typing speed by typing phrases un
 Players select a 30- or 60-second round and type randomly selected phrases. The game features real-time green/red character feedback, Backspace correction, nonrepeating prompts, staged AI-themed dialogue, scoring, WPM calculation, and replay.
 
 ## How to Play
-# Requirements
+### Requirements
 
-Windows with Visual Studio 2022 and MASM support
+-> Windows with Visual Studio 2022 and MASM support
 
-Win32/x86 build configuration
+-> Win32/x86 build configuration
 
-Kip Irvine's Irvine32 library and its include files
+-> Kip Irvine's Irvine32 library and its include files
 
-# Compilation and execution
+### Compilation and execution
 
 Open a Win32 MASM project in Visual Studio 2022.
 
@@ -30,7 +30,7 @@ Select Debug | Win32 and build the project.
 
 Run the generated executable or press Ctrl + F5.
 
-# Controls
+## Controls
 1 or 2: Select 30 or 60 seconds
 
 Space: Start the game
@@ -43,13 +43,13 @@ R: Replay after the round
 
 Any other key at the replay prompt: Exit
 
-# Scoring
+### Scoring
 Correct phrases are counted after the complete string comparison. WPM is calculated from the total characters in correctly submitted phrases, using five characters per word and the actual elapsed session time.
 
 ## Implementation
 
 The project demonstrates MASM procedures, arrays, pointers, random selection, conditional jumps, string operations, nonblocking keyboard input, console colors, and timer arithmetic.
 
-# Limitation
+### Limitation
 
 The WPM statistic measures fully correct submitted phrases rather than raw typing speed. The application requires a compatible Windows console and Irvine32 build environment.
