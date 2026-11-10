@@ -27,6 +27,12 @@ msgSelected BYTE "Selected duration (seconds): ",0
 msgReady BYTE "Press SPACEBAR to start...",0Dh,0Ah,0
 msgStarted BYTE "Let's begin!",0Dh,0Ah,0
 
+
+; Timer values (Irvine, Ch. 5, Sec. 5.4.3)
+startTime DWORD 0
+durationMs DWORD 0
+
+
 .code
 main PROC
   
@@ -58,6 +64,12 @@ main PROC
        mov edx, OFFSET msgSelected
        call WriteString
        mov eax, timerSeconds
+       mov ebx, 1000
+       mul ebx ;MUL converts seconds ->  milliseconds (Chapter 7)
+       mov durationMs, eax
+       call GetMseconds ; returns milliseconds since midnight
+       mov startTime, eax
+
        call WriteDec
        call Crlf
 
