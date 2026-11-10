@@ -46,6 +46,11 @@ correctCount DWORD 0       ; # of correctly typed phrases
 correctChars DWORD 0       ; characters from correct submission 
 elapsedMs DWORD 0          ; actual duration in ms
 
+msgCountdown BYTE "TIME LEFT: ",0 ; countdown display and cursor position
+msgClear BYTE "   ",0
+lastSeconds DWORD -1
+outHandle HANDLE ?
+consoleInfo CONSOLE_SCREEN_BUFFER_INFO <>
 
 .code
 main PROC
@@ -60,6 +65,9 @@ main PROC
    call Crlf
 
    call Randomize ; Irvine32 random number generator (Chapter 5)
+
+   INVOKE GetStdHandle, -11 ; get windows output handle (Chapter 11)
+   mov outHandle, eax
 
    ShowMenu:
        ; Display menu using Irvine32 (Chapter 5.4)
