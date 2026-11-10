@@ -89,6 +89,15 @@ main PROC
     call GetMseconds      ; read current time into eax, to save the starting time
     mov startTime, eax
 
+    mov eax, phraseCount  ; RandomRange selects a number from 0 to phraseCount - 1 (Chapter 5.4)
+    call RandomRange
+
+    shl eax, 2            ; multiply index by 4 to find DWORD ptr
+    mov edx, phraseTable[eax]
+    call WriteString
+    call Crlf
+
+
     GameTimerLoop: 
        call GetMseconds    ; current time in eax
        sub eax, startTime  ; calculates elaspsed time (milliseconds)
