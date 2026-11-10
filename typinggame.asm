@@ -129,7 +129,10 @@ main PROC
        mov esi, inputIndex
        cmp esi, 63
        jae NoKeyPressed
+
        mov userBuffer[esi], al  ; each char is put into userBuffer and displayed
+       mov ebx, targetPtr
+       call ColorTypedChar
        inc inputIndex
        call WriteChar
     NoKeyPressed:
