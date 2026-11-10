@@ -49,9 +49,10 @@ main PROC
    call Crlf
    call Randomize ; Irvine32 random number generator (Chapter 5)
 
-   ; Display menu using Irvine32 (Chapter 5.4)
-   mov edx, OFFSET msgMenu
-   call WriteString
+   ShowMenu:
+       ; Display menu using Irvine32 (Chapter 5.4)
+       mov edx, OFFSET msgMenu
+       call WriteString
 
    
    ; Select game duration. Irvine, Chapter 5.4 (ReadChar, WriteDec)
@@ -185,9 +186,15 @@ main PROC
        call ShowScore      ; display correct phrase count
        call ShowWPM        ; display words per minute
        
+
        mov edx, OFFSET msgReplay
        call WriteString
-       call ReadChar
+
+    WaitForReplay:
+       mov eax, 20
+       call Delay         ; give Windows time to process keys
+       call ReadKey       ; check keyboard without blocking
+       jz WaitForReplay   ; keep on checking until a key arrives
        cmp al, 'r'
        je ReplayGame
        cmp al, 'R'
@@ -201,7 +208,7 @@ main PROC
        mov inputIndex, 0
        mov BYTE PTR userBuffer, 0
        call Crlf
-       jmp SelectTime       ; jump back to start menu
+       jmp ShowMenu       ; jump back to start menu
 
     ExitGame:
        INVOKE ExitProcess, 0
