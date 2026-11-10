@@ -132,7 +132,8 @@ main PROC
 
        mov userBuffer[esi], al  ; each char is put into userBuffer and displayed
        mov ebx, targetPtr
-       call ColorTypedChar
+       mov dl, [ebx+esi]        ; expected character
+       call ColorTypedChar      ; show character in green or red
        inc inputIndex
        call WriteChar
     NoKeyPressed:
