@@ -13,6 +13,7 @@ ExitProcess PROTO, dwExitCode:DWORD
 INCLUDE Irvine32.inc
 
 .data
+INCLUDE phrases.inc ; use our phrase bank
 msgTitle BYTE "ASSEMBLY TYPING GAME", 0
 msgTimeUp BYTE "Time's up... how'd you do?",0Dh,0Ah,0
 
