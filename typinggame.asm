@@ -154,9 +154,7 @@ main PROC
         jmp NoKeyPressed
 
     SubmitPhrase:
-        mov esi, OFFSET userBuffer
-        mov edi, targetPtr
-        call Str_compare   ; compare entered text with the target (Chapter 9)
+        INVOKE Str_compare, ADDR userBuffer, targetPtr   ; compare entered text with the target (Chapter 9.3)
         jne NextPhrase     ; skips correctCount when they are different
         inc correctCount   ; add to correct phrases when they match
 
@@ -171,6 +169,7 @@ main PROC
        call Crlf
        mov edx, OFFSET msgTimeUp
        call WriteString
+       call ShowScore      ; display correct phrase count
 
    INVOKE ExitProcess, 0
 
@@ -179,5 +178,6 @@ main ENDP
 INCLUDE phrase_logic.inc    ; phrase reset
 INCLUDE typing_feedback.inc ; text color feedback
 INCLUDE backspace.inc       ; backspace handling
+INCLUDE stats.inc           ; stats for end of game
 
 END main
