@@ -90,6 +90,10 @@ main PROC
     mov startTime, eax
 
     PickPhrase: 
+        mov eax, usedCount
+        cmp eax, phraseCount  ; stop selecting when every phrase has been used
+        jae GameTimeUp        ; (Chapter 6 cmp and jumps)
+        
         mov eax, phraseCount  ; RandomRange selects a number from 0 to phraseCount - 1 (Chapter 5.4)
         call RandomRange
         
@@ -98,10 +102,6 @@ main PROC
         jne PickPhrase        ; try again if phrase has been seen already
         mov usedFlags[ebx], 1 ; mark phrase as seen
         inc usedCount         ; add to count of chosen phrases
-
-        mov eax, usedCount
-        cmp eax, phraseCount  ; stop selecting when every phrase has been used
-        jae GameTimeUp        ; (Chapter 6 cmp and jumps)
 
     shl eax, 2            ; multiply index by 4 to find DWORD ptr
     mov edx, phraseTable[eax]
