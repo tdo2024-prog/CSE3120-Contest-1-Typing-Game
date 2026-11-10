@@ -14,7 +14,13 @@ INCLUDE Irvine32.inc
 
 .data
 INCLUDE phrases.inc ; use our phrase bank
-msgTitle BYTE "ASSEMBLY TYPING GAME", 0
+
+; title of game diplayed in cyan, menu and gameplay in light gray
+msgTitle BYTE "========================================",0Dh,0Ah
+         BYTE "       ESCAPE THE CPU // TERMINAL       ",0Dh,0Ah
+         BYTE "========================================",0Dh,0Ah
+         BYTE "        SYSTEM STATUS: ONLINE           ",0Dh,0Ah,0
+
 msgTimeUp BYTE "Time's up... how'd you do?",0Dh,0Ah,0
 
 ; Timer menu (Irvine, Chapter 3.4)
@@ -43,10 +49,16 @@ elapsedMs DWORD 0          ; actual duration in ms
 
 .code
 main PROC
-  
+
+   call Clrscr    
+   mov eax, lightCyan      ; clear console screen and display title in cyan (Chapter 5)
+   call SetTextColor
    mov edx, OFFSET msgTitle
    call WriteString
+   mov eax, lightGray
+   call SetTextColor
    call Crlf
+
    call Randomize ; Irvine32 random number generator (Chapter 5)
 
    ShowMenu:
