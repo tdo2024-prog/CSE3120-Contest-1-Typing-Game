@@ -89,8 +89,16 @@ main PROC
     call GetMseconds      ; read current time into eax, to save the starting time
     mov startTime, eax
 
-    mov eax, phraseCount  ; RandomRange selects a number from 0 to phraseCount - 1 (Chapter 5.4)
-    call RandomRange
+    PickPhrase: 
+        mov eax, phraseCount  ; RandomRange selects a number from 0 to phraseCount - 1 (Chapter 5.4)
+        call RandomRange
+        
+        mov ebx, eax          ; ebx holds random index for checking used phrases
+        cmp usedFlags[ebx], 0
+        jne PickPhrase        ; try again if phrase has been seen already
+        mov usedFlags[ebx], 1 ; mark phrase as seen
+        inc usedCount         ; add to count of chosen phrases
+
 
     shl eax, 2            ; multiply index by 4 to find DWORD ptr
     mov edx, phraseTable[eax]
