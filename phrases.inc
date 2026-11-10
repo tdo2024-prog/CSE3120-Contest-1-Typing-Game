@@ -12,8 +12,24 @@ phrase10 BYTE "INC ECX",0
 phrase11 BYTE "DEC ESI",0
 phrase12 BYTE "JNE EndOfLoopBody",0
 
+; jarvis dialogue and humor
+phrase13 BYTE "Sir the build completed with reservations",0
+phrase14 BYTE "I have prepared several bad ideas",0
+phrase15 BYTE "That was bold even for you",0
+phrase16 BYTE "Power levels are mostly encouraging",0
+phrase17 BYTE "I ran the numbers they look dramatic",0
+phrase18 BYTE "Please try not to break the ceiling",0
+phrase19 BYTE "The suit would not recommend that",0
+phrase20 BYTE "I am detecting confidence without evidence",0
+
 ; storing phrases in a table (Irvine chapter 4.4)
-phraseTable DWORD OFFSET phrase1, OFFSET phrase2, OFFSET phrase3, OFFSET phrase4, OFFSET phrase5, OFFSET phrase6, OFFSET phrase7, OFFSET phrase8, OFFSET phrase9, OFFSET phrase10, OFFSET phrase11, OFFSET phrase12
+
+phraseTable DWORD OFFSET phrase1, OFFSET phrase2, OFFSET phrase3, OFFSET phrase4, OFFSET phrase5,
+   OFFSET phrase6, OFFSET phrase7, OFFSET phrase8, OFFSET phrase9, OFFSET phrase10,
+   OFFSET phrase11, OFFSET phrase12, OFFSET phrase13, OFFSET phrase14, OFFSET phrase15,
+   OFFSET phrase16, OFFSET phrase17, OFFSET phrase18, OFFSET phrase19, OFFSET phrase20
+   ; LENGTHOF phraseTable will now evaluate to 20, so the game automatically knows there are 20 available phrases 
+   ; also creates 20 used flags.
 phraseCount DWORD LENGTHOF phraseTable
 
 ; tracking which phases that were already used (Irvine chapter 3 and 4)
