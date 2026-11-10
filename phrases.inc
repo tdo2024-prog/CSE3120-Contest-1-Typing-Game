@@ -22,14 +22,26 @@ phrase18 BYTE "Please try not to break the ceiling",0
 phrase19 BYTE "The suit would not recommend that",0
 phrase20 BYTE "I am detecting confidence without evidence",0
 
+; dry assistant humor
+phrase21 BYTE "Your plan has been noted and feared",0
+phrase22 BYTE "I can explain this later if we survive",0
+phrase23 BYTE "That command felt deeply personal",0
+phrase24 BYTE "I optimized the chaos as requested",0
+phrase25 BYTE "Would you like the honest error report",0
+phrase26 BYTE "The machine is judging your timing",0
+phrase27 BYTE "I have several concerns sir",0
+phrase28 BYTE "That outcome was statistically unwise",0
+
 ; storing phrases in a table (Irvine chapter 4.4)
 
 phraseTable DWORD OFFSET phrase1, OFFSET phrase2, OFFSET phrase3, OFFSET phrase4, OFFSET phrase5,
    OFFSET phrase6, OFFSET phrase7, OFFSET phrase8, OFFSET phrase9, OFFSET phrase10,
    OFFSET phrase11, OFFSET phrase12, OFFSET phrase13, OFFSET phrase14, OFFSET phrase15,
-   OFFSET phrase16, OFFSET phrase17, OFFSET phrase18, OFFSET phrase19, OFFSET phrase20
-   ; LENGTHOF phraseTable will now evaluate to 20, so the game automatically knows there are 20 available phrases 
-   ; also creates 20 used flags.
+   OFFSET phrase16, OFFSET phrase17, OFFSET phrase18, OFFSET phrase19, OFFSET phrase20,
+   OFFSET phrase21, OFFSET phrase22, OFFSET phrase23, OFFSET phrase24,
+   OFFSET phrase25, OFFSET phrase26, OFFSET phrase27, OFFSET phrase28
+   ; LENGTHOF tracks the number of phrases
+
 phraseCount DWORD LENGTHOF phraseTable
 
 ; tracking which phases that were already used (Irvine chapter 3 and 4)
