@@ -37,6 +37,8 @@ inputIndex DWORD 0         ; tracks number of characters tyoed
 targetPtr DWORD 0          ; stores address of chosen phrase
 correctCount DWORD 0       ; # of correctly typed phrases
 correctChars DWORD 0       ; characters from correct submission 
+elapsedMs DWORD 0          ; actual duration in ms
+
 
 .code
 main PROC
@@ -168,6 +170,14 @@ main PROC
 
 
     GameTimeUp:
+       call GetMseconds
+       sub eax, startTime
+       cmp eax, durationMs
+       jbe SaveElapsed
+       mov eax, durationMs
+
+    SaveElapsed:
+       mov elapsedMs, eax
        call Crlf
        mov edx, OFFSET msgTimeUp
        call WriteString
