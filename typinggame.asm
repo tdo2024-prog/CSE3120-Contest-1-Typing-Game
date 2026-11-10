@@ -126,4 +126,7 @@ main PROC
    INVOKE ExitProcess, 0
 
 main ENDP
+
+INCLUDE phrase_logic.inc ; phrase reset
+
 END main
