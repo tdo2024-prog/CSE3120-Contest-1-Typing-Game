@@ -14,7 +14,7 @@ INCLUDE Irvine32.inc
 
 .data
 msgTitle BYTE "ASSEMBLY TYPING GAME", 0
-
+msgTimeUp BYTE "Time's up... how'd you do?",0Dh,0Ah,0
 
 ; Timer menu (Irvine, Chapter 3.4)
 msgMenu BYTE "Select timer:",0Dh,0Ah
@@ -64,26 +64,42 @@ main PROC
        mov edx, OFFSET msgSelected
        call WriteString
        mov eax, timerSeconds
-       mov ebx, 1000
-       mul ebx ;MUL converts seconds ->  milliseconds (Chapter 7)
-       mov durationMs, eax
-       call GetMseconds ; returns milliseconds since midnight
-       mov startTime, eax
-
        call WriteDec
        call Crlf
 
-   ; Wait for the user to hit the spacebar to continue. Irvine, Ch. 5 and 6 (ReadChar, CMP, conditional jmp)
     mov edx, OFFSET msgReady
     call WriteString
 
-    WaitForSpace:
-    call ReadChar
-    cmp al, ' '
-    jne WaitForSpace
 
-    mov edx, OFFSET msgStarted
-    call WriteString
+    WaitForSpace: 
+       call ReadChar  ; read a key into AL register
+       cmp al, ' '    ; compare with empty space 
+       jne WaitForSpace ; repeat if the spacebar wasnt pressed
+
+    mov edx, OFFSET msgStarted ; waits for the user to hit the spacebar to continue. 
+    call WriteString         ; Irvine, Ch. 5 and 6 (ReadChar, CMP, conditional jmp)
+
+    mov eax, timerSeconds ; then start the timer
+    mov ebx, 1000
+    mul ebx               ; MUL converts seconds -> milliseconds
+    mov durationMs, eax
+
+    call GetMseconds      ; read current time into eax, to save the starting time
+    mov startTime, eax
+
+    GameTimerLoop: 
+       call GetMseconds    ; current time in eax
+       sub eax, startTime  ; calculates elaspsed time (milliseconds)
+       cmp eax, durationMs
+       jae GameTimeUp      ; exits when the elapsed time >= duration selected (unsigned) 
+       mov eax, 10
+       call Delay          ; pause for 10ms before checking again
+       jmp GameTimerLoop   
+
+    GameTimeUp:
+       call Crlf
+       mov edx, OFFSET msgTimeUp
+       call WriteString
 
    INVOKE ExitProcess, 0
 
