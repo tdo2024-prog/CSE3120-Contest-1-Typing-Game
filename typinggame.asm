@@ -127,7 +127,7 @@ main PROC
        cmp al, 13
        je SubmitPhrase     ; hitting enter submits the phrase 
        cmp al, 8
-       je NoKeyPressed
+       je ProcessBackspace 
        mov esi, inputIndex
        cmp esi, 63
        jae NoKeyPressed
@@ -143,6 +143,10 @@ main PROC
        mov eax, 10
        call Delay          ; pause for 10ms before checking again
        jmp GameTimerLoop   
+
+    ProcessBackspace:
+        call HandleBackspace ; decreases inputIndex, clears last character, and removes from display
+        jmp NoKeyPressed
 
     SubmitPhrase:
         mov esi, OFFSET userBuffer
@@ -167,7 +171,8 @@ main PROC
 
 main ENDP
 
-INCLUDE phrase_logic.inc ; phrase reset
+INCLUDE phrase_logic.inc    ; phrase reset
 INCLUDE typing_feedback.inc ; text color feedback
+INCLUDE backspace.inc       ; backspace handling
 
 END main
