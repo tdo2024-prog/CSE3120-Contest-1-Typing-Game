@@ -94,6 +94,11 @@ main PROC
     mov startTime, eax
 
     PickPhrase: 
+        call GetMseconds      ; check time left before choosing another phrase
+        sub eax, startTime
+        cmp eax, durationMs
+        jae GameTimeup
+
         mov eax, usedCount
         cmp eax, phraseCount  ; stop selecting when every phrase has been used
         jae GameTimeUp        ; (Chapter 6 cmp and jumps)
