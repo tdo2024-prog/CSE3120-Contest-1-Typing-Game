@@ -117,6 +117,23 @@ main PROC
        sub eax, startTime  ; calculates elaspsed time (milliseconds)
        cmp eax, durationMs
        jae GameTimeUp      ; exits when the elapsed time >= duration selected (unsigned) 
+       
+       call ReadKey        ; sets zero flag when no key is available; check input, timer's still going
+       jz NoKeyPressed     ; ZF = 1 means no input given
+       cmp al, 0
+       je NoKeyPressed     ; ignore special keys
+       cmp al, 13
+       je NoKeyPressed
+       cmp al, 8
+       je NoKeyPressed
+       mov esi, inputIndex
+       cmp esi, 63
+       jae NoKeyPressed
+       mov userBuffer[esi], al  ; each char is put into userBuffer and displayed
+       inc inputIndex
+       call WriteChar
+    NoKeyPressed:
+       
        mov eax, 10
        call Delay          ; pause for 10ms before checking again
        jmp GameTimerLoop   
