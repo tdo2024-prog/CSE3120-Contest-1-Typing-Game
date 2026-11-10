@@ -91,6 +91,7 @@ main PROC
        mov timerSeconds, 30
 
     ShowTime:
+       mov lastSeconds, -1  ; add the reset, to refresh countdown while playing
        mov edx, OFFSET msgSelected
        call WriteString
        mov eax, timerSeconds
@@ -164,6 +165,7 @@ main PROC
        cmp eax, durationMs
        jae GameTimeUp      ; exits when the elapsed time >= duration selected (unsigned) 
        
+       call ShowCountdown
        call ReadKey        ; sets zero flag when no key is available; check input, timer's still going
        jz NoKeyPressed     ; ZF = 1 means no input given
        cmp al, 0
@@ -255,5 +257,6 @@ INCLUDE typing_feedback.inc ; text color feedback
 INCLUDE backspace.inc       ; backspace handling
 INCLUDE stats.inc           ; stats for end of game
 INCLUDE wpm.inc             ; wpm calculation
+INCLUDE game_ui.inc         ; live countdown
 
 END main
