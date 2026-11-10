@@ -148,5 +148,6 @@ main PROC
 main ENDP
 
 INCLUDE phrase_logic.inc ; phrase reset
+INCLUDE typing_feedback.inc ; text color feedback
 
 END main
