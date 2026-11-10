@@ -36,7 +36,7 @@ userBuffer BYTE 64 DUP(0)  ; 64-byte buffer initialized to zero
 inputIndex DWORD 0         ; tracks number of characters tyoed
 targetPtr DWORD 0          ; stores address of chosen phrase
 correctCount DWORD 0       ; # of correctly typed phrases
-
+correctChars DWORD 0       ; characters from correct submission 
 
 .code
 main PROC
@@ -157,6 +157,8 @@ main PROC
         INVOKE Str_compare, ADDR userBuffer, targetPtr   ; compare entered text with the target (Chapter 9.3)
         jne NextPhrase     ; skips correctCount when they are different
         inc correctCount   ; add to correct phrases when they match
+        INVOKE Str_length, targetPtr  ; receives the phrase address and returns its length in EAX
+        add correctChars, eax
 
     NextPhrase:
         call Crlf
