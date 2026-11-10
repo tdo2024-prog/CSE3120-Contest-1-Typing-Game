@@ -2,7 +2,7 @@
 By Madison Sujanani and Thomas Do
 
 ## Description
-Programmers type all day. What better way to test your skills by playing a typing game? This assembly game lets players show off their typing speeds by typing in phrases under a timer, giving them their accuracy and speed. 
+Programmers type all day. What better way to gain typing and literacy skills than a typing game? Or to show off your skills? This assembly game lets players show off their typing speed by typing phrases under a timer, measuring their accuracy and speed. 
 
 ## How to Play
-Build and compile the program. Then, the console will print a welcome page. There, you can choose between a 30 second or 60 second timer. The console will give players phrases to type, and at the end, it will give the player their accuracy and speed score.
+Build and compile the program. Then, the console will print a welcome page. There, you can choose between a 30-second or 60-second timer. The console will give players phrases to type, and at the end, it will display their accuracy and speed scores.
