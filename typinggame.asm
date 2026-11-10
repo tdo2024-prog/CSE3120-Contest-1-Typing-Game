@@ -32,7 +32,9 @@ msgStarted BYTE "Let's begin!",0Dh,0Ah,0
 ; Timer values (Irvine, Ch. 5, Sec. 5.4.3)
 startTime DWORD 0
 durationMs DWORD 0
-
+userBuffer BYTE 64 DUP(0)  ; 64-byte buffer initialized to zero
+inputIndex DWORD 0         ; tracks number of characters tyoed
+targetPtr DWORD 0          ; stores address of chosen phrase
 
 .code
 main PROC
@@ -105,6 +107,7 @@ main PROC
 
     shl eax, 2            ; multiply index by 4 to find DWORD ptr
     mov edx, phraseTable[eax]
+    mov targetPtr, edx    ; save chosen phrase address in edx
     call WriteString
     call Crlf
 
