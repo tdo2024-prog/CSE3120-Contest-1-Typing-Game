@@ -7,14 +7,6 @@ Programmers type all day. What better way to gain typing and literacy skills tha
 This assembly game lets players show off their typing speed by typing phrases under a timer, measuring their accuracy and speed. 
 Players select a 30- or 60-second round and type randomly selected phrases. The game features real-time green/red character feedback, Backspace correction, nonrepeating prompts, staged AI-themed dialogue, scoring, WPM calculation, and replay.
 
-## Requirements
-
--> Windows with Visual Studio 2022 and MASM support
-
--> Win32/x86 build configuration
-
--> Kip Irvine's Irvine32 library and its include files
-
 ## How to Play
 # Requirements
 
@@ -24,7 +16,7 @@ Win32/x86 build configuration
 
 Kip Irvine's Irvine32 library and its include files
 
-Compilation and execution
+# Compilation and execution
 
 Open a Win32 MASM project in Visual Studio 2022.
 
