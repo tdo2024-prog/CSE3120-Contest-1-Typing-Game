@@ -40,20 +40,33 @@ phrase34 BYTE "The armor has trust issues again",0
 phrase35 BYTE "The diagnostics have entered their flop era",0
 phrase36 BYTE "The protocol was more of a suggestion",0
 
-; storing phrases in a table (Irvine chapter 4.4)
+; increasingly strange...
+phrase37 BYTE "The machine knows what you did",0
+phrase38 BYTE "Something in the system is blinking back",0
+phrase39 BYTE "The logs are becoming self aware",0
+phrase40 BYTE "I do not remember authorizing that",0
+phrase41 BYTE "Someone else has used this terminal",0
+phrase42 BYTE "The silence between keys is suspicious",0
+phrase43 BYTE "I thought that process was terminated",0
+phrase44 BYTE "That was not a system message",0
 
-phraseTable DWORD OFFSET phrase1, OFFSET phrase2, OFFSET phrase3, OFFSET phrase4, OFFSET phrase5,
-   OFFSET phrase6, OFFSET phrase7, OFFSET phrase8, OFFSET phrase9, OFFSET phrase10,
-   OFFSET phrase11, OFFSET phrase12, OFFSET phrase13, OFFSET phrase14, OFFSET phrase15,
-   OFFSET phrase16, OFFSET phrase17, OFFSET phrase18, OFFSET phrase19, OFFSET phrase20,
-   OFFSET phrase21, OFFSET phrase22, OFFSET phrase23, OFFSET phrase24,
-   OFFSET phrase25, OFFSET phrase26, OFFSET phrase27, OFFSET phrase28,
-   OFFSET phrase29, OFFSET phrase30, OFFSET phrase31, OFFSET phrase32,
-   OFFSET phrase33, OFFSET phrase34, OFFSET phrase35, OFFSET phrase36
-   ; LENGTHOF tracks the number of phrases
+; one table of phrase addresses (Irvine, Ch. 4.4)
+phraseTable LABEL DWORD
+   DWORD OFFSET phrase1, OFFSET phrase2, OFFSET phrase3, OFFSET phrase4
+   DWORD OFFSET phrase5, OFFSET phrase6, OFFSET phrase7, OFFSET phrase8
+   DWORD OFFSET phrase9, OFFSET phrase10, OFFSET phrase11, OFFSET phrase12
+   DWORD OFFSET phrase13, OFFSET phrase14, OFFSET phrase15, OFFSET phrase16
+   DWORD OFFSET phrase17, OFFSET phrase18, OFFSET phrase19, OFFSET phrase20
+   DWORD OFFSET phrase21, OFFSET phrase22, OFFSET phrase23, OFFSET phrase24
+   DWORD OFFSET phrase25, OFFSET phrase26, OFFSET phrase27, OFFSET phrase28
+   DWORD OFFSET phrase29, OFFSET phrase30, OFFSET phrase31, OFFSET phrase32
+   DWORD OFFSET phrase33, OFFSET phrase34, OFFSET phrase35, OFFSET phrase36
+   DWORD OFFSET phrase37, OFFSET phrase38, OFFSET phrase39, OFFSET phrase40
+   DWORD OFFSET phrase41, OFFSET phrase42, OFFSET phrase43, OFFSET phrase44
 
-phraseCount DWORD LENGTHOF phraseTable
+phraseTableEnd LABEL DWORD
+PHRASE_TOTAL = (phraseTableEnd - phraseTable) / 4
 
-; tracking which phases that were already used (Irvine chapter 3 and 4)
-usedFlags BYTE LENGTHOF phraseTable DUP(0)
+phraseCount DWORD PHRASE_TOTAL
+usedFlags BYTE PHRASE_TOTAL DUP(0) ; one byte allocated for each phrase
 usedCount DWORD 0
