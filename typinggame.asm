@@ -40,6 +40,7 @@ main PROC
    mov edx, OFFSET msgTitle
    call WriteString
    call Crlf
+   call Randomize ; Irvine32 random number generator (Chapter 5)
 
    ; Display menu using Irvine32 (Chapter 5.4)
    mov edx, OFFSET msgMenu
