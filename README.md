@@ -1,6 +1,8 @@
 # CSE3120-Contest-1-Typing-Game
 By Madison Sujanani and Thomas Do
 
+#### Github link: https://github.com/tdo2024-prog/CSE3120-Contest-1-Typing-Game
+
 ## Description
 Programmers type all day. What better way to gain typing and literacy skills than a typing game? Or to show off your skills? 
 'Escape the CPU' is an x86 MASM typing game built using the Irvine32 library. 
